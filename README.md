@@ -1,4 +1,4 @@
-﻿# Fantasy Premier League Database
+# Fantasy Premier League Database
 
 A Microsoft SQL Server database project for a Fantasy Premier League style game. It models user accounts and squads, players and their gameweek performance, transfers, leagues, and user gameweek history.
 
@@ -6,21 +6,23 @@ A Microsoft SQL Server database project for a Fantasy Premier League style game.
 
 ```text
 fpl_db/
-├── README.md
-├── database/
-│   ├── fplscript.sql
-│   └── FPL_db_Insert_Example.sql
-└── docs/
-    └── FPL_db_ERD_and_Mapping.docx
+|-- README.md
+|-- database/
+|   |-- fplscript.sql
+|   `-- FPL_db_Insert_Example.sql
+`-- docs/
+    |-- FPL_db_ERD_and_Mapping.docx
+    `-- FPL_db_ERD_and_Mapping.md
 ```
 
-- `database/fplscript.sql` — database creation, schema, constraints, indexes, functions, stored procedures, and sample inserts.
+- `database/fplscript.sql` - database creation, schema, constraints, indexes, functions, stored procedures, and sample inserts.
 - `database/FPL_db_Insert_Example.sql` — additional example data inserts (review before running).
-- `docs/FPL_db_ERD_and_Mapping.docx` — entity relationship diagram and relational table mapping.
+- `docs/FPL_db_ERD_and_Mapping.docx` - original Word ERD and relational mapping document.
+- `docs/FPL_db_ERD_and_Mapping.md` - Markdown conversion, with the ERD diagram before the relational mapping.
 
 ## Database design
 
-The schema has 9 tables: `users`, `Players`, `GameWeek`, `PlayerPerformance`, `UsersTeams`, `Transferss`, `UserGameWeekHistory`, `Leagues_cups`, and `UsersLeagues`. It uses composite keys for gameweek history and associations, and foreign keys to connect users, players, leagues, and gameweeks. The Word document lists each table's keys and columns and illustrates the declared relationships.
+The schema has 9 tables: `users`, `Players`, `GameWeek`, `PlayerPerformance`, `UsersTeams`, `Transferss`, `UserGameWeekHistory`, `Leagues_cups`, and `UsersLeagues`. It uses composite keys for gameweek history and associations, and foreign keys to connect users, players, leagues, and gameweeks. The ERD documents list the table mappings and illustrate the declared relationships.
 
 The SQL script also defines functions for looking up names and user/player information, plus stored procedures for inserting users, leagues, transfers and squad entries, updating player prices, and changing a squad selection.
 
@@ -41,3 +43,9 @@ The SQL script also defines functions for looking up names and user/player infor
 - `UsersTeams` has primary key `(UserID, PlayerID)`, so the same player cannot have multiple rows for the same user across different gameweeks. If squads are intended to be recorded separately for each gameweek, consider including `gameweekid` in that primary key.
 - `Players.TeamName` is a text field; the schema does not define a separate clubs table or a foreign key for it.
 - Player and account prices are stored as integers. Confirm whether those values represent whole units or tenths of a unit in the application.
+
+## GitHub files
+
+The README, the two SQL scripts, and the Word and Markdown ERD documents are the project files to commit. Do not normally commit SQL Server's live `.mdf` and `.ldf` files. If you need a portable database snapshot with its data, create a SQL Server `.bak` backup or `.bacpac` and share it as a release/download.
+
+Before publishing, remove or replace personal/demo account data in SQL scripts. The schema script includes a sample username, email address, and plaintext-looking password.
