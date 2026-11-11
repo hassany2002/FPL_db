@@ -43,9 +43,3 @@ The SQL script also defines functions for looking up names and user/player infor
 - `UsersTeams` has primary key `(UserID, PlayerID)`, so the same player cannot have multiple rows for the same user across different gameweeks. If squads are intended to be recorded separately for each gameweek, consider including `gameweekid` in that primary key.
 - `Players.TeamName` is a text field; the schema does not define a separate clubs table or a foreign key for it.
 - Player and account prices are stored as integers. Confirm whether those values represent whole units or tenths of a unit in the application.
-
-## GitHub files
-
-The README, the two SQL scripts, and the Word and Markdown ERD documents are the project files to commit. Do not normally commit SQL Server's live `.mdf` and `.ldf` files. If you need a portable database snapshot with its data, create a SQL Server `.bak` backup or `.bacpac` and share it as a release/download.
-
-Before publishing, remove or replace personal/demo account data in SQL scripts. The schema script includes a sample username, email address, and plaintext-looking password.
